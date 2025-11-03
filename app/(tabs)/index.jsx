@@ -1,39 +1,31 @@
-import { Link } from 'expo-router'
-import { StyleSheet, Text, View } from 'react-native'
-import Spacer from '../../components/Spacer'
+import { useState } from 'react'
+import { StyleSheet, Switch, Text, View } from 'react-native'
 
-const Homescreen = () => {
+const Index = () => {
+   const [isEnabled, setIsEnabled] = useState(false)
+
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState)
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Homescreen</Text>
-      <Spacer padding={10}>
-        <Text>This is my Homescreen</Text>
-      </Spacer>
-      <Link href="/contact" style={styles.button}>
-           <Spacer padding={10}>
-        <Text style={{fontSize:20}}>home</Text>
-      </Spacer>
-      </Link>
-      
+      <Text>Enable notifications</Text>
+      <Switch
+        trackColor={{ false: '#767577', true: '#81b0ff' }}
+        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+    
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
     </View>
   )
 }
 
-export default Homescreen
+export default Index
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',   
-    },
-    title:{
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    button:{
-        backgroundColor: '#007BFF',
-        padding: 10,
-        borderRadius: 5,    
-    }
+  container:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
+  }
 })
